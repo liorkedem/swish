@@ -2,7 +2,7 @@ import ApiClientService from "../api-client-service/api-client-service";
 
 const BASE_URL = "http://lior-kedem.com/swish";
 const ROUTES = {
-  PLAYER_PROFILE: { RELATIVE_PATH: "stats_GET.php", TAG: "getPlayerById" },
+  PLAYER_PROFILE: { RELATIVE_PATH: "STATS_GET.php", TAG: "getPlayerById" },
 };
 
 export default class ApiService {

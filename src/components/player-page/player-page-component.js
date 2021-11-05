@@ -1,9 +1,14 @@
 import React from "react";
 import ApiService from "../../services/api-services/api-service.js";
+import { TEAMS } from "../../constants/teams";
+import "./player-page-component.css";
 
 export default class PlayerPageComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      player: {},
+    };
   }
 
   async componentDidMount() {
@@ -13,15 +18,27 @@ export default class PlayerPageComponent extends React.Component {
   async initPlayer() {
     const { playerId } = this.props;
     const player = await ApiService.getPlayerProfile(playerId);
-    // const player = await ApiService.getHealth();
     this.setState({ player });
   }
 
+  renderPlayerBasicInfo() {
+    const { player } = this.state;
+
+    return (
+      <div className="player-basic-info-wrapper">
+        <div className="player-name">{player.NAME}</div>
+        <div className="player-position">{player.POSITION}</div>
+        <div className="player-height">{player.HEIGHT}</div>
+        <div className="player-team">{TEAMS[player.TEAM]?.nickname}</div>
+        <div className="team-logo">{TEAMS[player.TEAM]?.emoji}</div>
+      </div>
+    );
+  }
+
   render() {
-    const { playerId } = this.props;
     return (
       <div className="player-page-component">
-        <div>{playerId}</div>
+        {this.renderPlayerBasicInfo()}
       </div>
     );
   }
