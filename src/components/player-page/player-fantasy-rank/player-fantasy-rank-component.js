@@ -17,12 +17,10 @@ export default class PlayerFantasyRankComponent extends React.Component {
   }
 
   render() {
-    const { fantasyRank } = this.props;
-    const fantasyRanks = Object.entries(fantasyRank);
-
+    const { fantasyRanks } = this.props;
     return (
       <div className="player-fantasy-rank-component">
-        {fantasyRanks.map(([key, value]) =>
+        {Object.entries(fantasyRanks).map(([key, value]) =>
           this.renderCategoryRank(key, value)
         )}
       </div>

@@ -10,7 +10,7 @@ export default class PlayerPageComponent extends React.Component {
     this.state = {
       player: {},
       playerStats: {},
-      fantasyRank: {},
+      fantasyRanks: {},
     };
   }
 
@@ -22,22 +22,16 @@ export default class PlayerPageComponent extends React.Component {
     const { playerId } = this.props;
     const player = await ApiService.getPlayerProfile(playerId);
     const playerStats = await ApiService.getPlayerStats(playerId);
-
-    const fantasyRank = {};
-    for (const category of ["ROTO8", "ROTO9", "DFS"]) {
-      fantasyRank[category] = await ApiService.getFantasyRank(playerId, {
-        CATEGORY: category,
-      });
-    }
-    this.setState({ player, playerStats, fantasyRank });
+    const fantasyRanks = await ApiService.getFantasyRanks(playerId);
+    this.setState({ player, playerStats, fantasyRanks });
   }
 
   render() {
-    const { player, playerStats, fantasyRank } = this.state;
+    const { player, playerStats, fantasyRanks } = this.state;
     return (
       <div className="player-page-component">
         <PlayerBasicInfoComponent player={player} />
-        <PlayerFantasyRankComponent fantasyRank={fantasyRank} />
+        <PlayerFantasyRankComponent fantasyRanks={fantasyRanks} />
       </div>
     );
   }
