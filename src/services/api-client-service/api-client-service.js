@@ -29,8 +29,6 @@ export default class ApiClientService {
   }
 }
 
-// comment
-
 const convertObjectToQueryParams = (obj) => {
   if (obj) {
     return (
