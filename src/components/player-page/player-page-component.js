@@ -27,10 +27,10 @@ export default class PlayerPageComponent extends React.Component {
     return (
       <div className="player-basic-info-wrapper">
         <div className="player-name">{player.NAME}</div>
-        <div className="player-position">{player.POSITION}</div>
-        <div className="player-height">{player.HEIGHT}</div>
-        <div className="player-team">{TEAMS[player.TEAM]?.nickname}</div>
-        <div className="team-logo">{TEAMS[player.TEAM]?.emoji}</div>
+        <div className="player-status">
+          {TEAMS[player.TEAM]?.emoji} {TEAMS[player.TEAM]?.city}{" "}
+          {TEAMS[player.TEAM]?.nickname} | {player.POSITION} | {player.HEIGHT}
+        </div>
       </div>
     );
   }
