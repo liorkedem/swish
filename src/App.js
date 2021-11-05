@@ -1,11 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import PlayerPageComponent from "./components/player-page/player-page-component";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <PlayerPageComponent playerId="adebaba01" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
