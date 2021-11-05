@@ -1,0 +1,14 @@
+.player-basic-info-component {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-name {
+  font-size: 48px;
+}
+
+.player-status {
+  display: flex;
+  flex-direction: row;
+  font-size: 24px;
+}
