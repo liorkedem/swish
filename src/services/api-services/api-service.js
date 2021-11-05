@@ -3,6 +3,7 @@ import ApiClientService from "../api-client-service/api-client-service";
 const BASE_URL = "http://lior-kedem.com/swish";
 const ROUTES = {
   PLAYER_PROFILE: { RELATIVE_PATH: "STATS_GET.php", TAG: "getPlayerById" },
+  PLAYER_STATS: { RELATIVE_PATH: "STATS_GET.php", TAG: "getPersonalStatsById" },
 };
 
 export default class ApiService {
@@ -12,6 +13,16 @@ export default class ApiService {
       TAG: ROUTES.PLAYER_PROFILE.TAG,
     };
     const url = `${BASE_URL}/${ROUTES.PLAYER_PROFILE.RELATIVE_PATH}`;
+    return await ApiClientService.getData(url, params);
+  }
+
+  static async getPlayerStats(playerId, options = {}) {
+    const params = {
+      ID: playerId,
+      TAG: ROUTES.PLAYER_STATS.TAG,
+      PERIOD: options.period || "CURR_SEASON",
+    };
+    const url = `${BASE_URL}/${ROUTES.PLAYER_STATS.RELATIVE_PATH}`;
     return await ApiClientService.getData(url, params);
   }
 

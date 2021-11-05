@@ -7,8 +7,6 @@ export default class PlayerBasicInfoComponent extends React.Component {
     super(props);
   }
 
-  async componentDidMount() {}
-
   render() {
     const { player } = this.props;
 

@@ -4,7 +4,6 @@ export default class ApiClientService {
     const urlWithParams = `${url}${queryParams}`;
     const response = await fetch(urlWithParams);
     if (response.ok) {
-      debugger;
       const result = await response.json();
       return result;
     }
