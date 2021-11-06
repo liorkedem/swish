@@ -3,6 +3,8 @@ import ApiClientService from "../api-client-service/api-client-service";
 import {
   ALL_STATS_CATEGORIES,
   FANTASY_STATS_CATEGORIES,
+  PRIMARY_STATS_PERIOD,
+  ALL_STATS_PERIODS,
 } from "../../constants/stats";
 
 const BASE_URL = "http://lior-kedem.com/swish";
@@ -39,7 +41,7 @@ export default class ApiService {
       ID: playerId,
       TAG: ROUTES.FANTASY_RANK.TAG,
       CATEGORY: category,
-      PERIOD: options.period || "CURR_SEASON",
+      PERIOD: options.period || PRIMARY_STATS_PERIOD,
       ...options,
     };
     const url = `${BASE_URL}/${ROUTES.FANTASY_RANK.RELATIVE_PATH}`;
@@ -50,7 +52,7 @@ export default class ApiService {
     const params = {
       ID: playerId,
       TAG: ROUTES.PLAYER_STATS.TAG,
-      PERIOD: options.period || "CURR_SEASON",
+      PERIOD: options.period || PRIMARY_STATS_PERIOD,
       ...options,
     };
     const url = `${BASE_URL}/${ROUTES.PLAYER_STATS.RELATIVE_PATH}`;
@@ -59,6 +61,14 @@ export default class ApiService {
       ALL_STATS_CATEGORIES
     );
 
+    return playerStats;
+  }
+
+  static async getPlayerStatsFromAllPeriods(playerId, options = {}) {
+    const playerStats = {};
+    for (const period of ALL_STATS_PERIODS) {
+      playerStats[period] = await this.getPlayerStats(playerId, { period });
+    }
     return playerStats;
   }
 
