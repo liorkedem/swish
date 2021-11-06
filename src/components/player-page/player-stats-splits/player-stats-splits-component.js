@@ -24,12 +24,20 @@ export default class PlayerStatsSplitsComponent extends React.Component {
     );
   };
 
+  renderCategoryNames = () => {
+    return (
+      <div className="category-names-wrapper">
+        {ALL_STATS_CATEGORIES.map(this.renderCell)}
+      </div>
+    );
+  };
+
   render() {
     const { playerStats } = this.props;
     const periodsData = Object.values(playerStats);
     return (
       <div className="player-stats-splits-component">
-        {ALL_STATS_CATEGORIES.map(this.renderCell)}
+        {this.renderCategoryNames()}
         {_.map(periodsData, this.renderPeriodData)}
       </div>
     );
