@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./player-fantasy-rank-component.css";
 
 export default class PlayerFantasyRankComponent extends React.Component {
