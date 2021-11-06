@@ -4,6 +4,7 @@ import PlayerBasicInfoComponent from "./player-basic-info/player-basic-info-comp
 import PlayerFantasyRankComponent from "./player-fantasy-rank/player-fantasy-rank-component";
 import PlayerStatsComponent from "./player-stats/player-stats-component";
 import PlayerStatsSplitsComponent from "./player-stats-splits/player-stats-splits-component";
+import PlayerGameLogComponent from "./player-game-log/player-game-log-component";
 import ApiService from "../../services/api-services/api-service.js";
 import { PRIMARY_STATS_PERIOD } from "../../constants/stats";
 
@@ -14,6 +15,7 @@ export default class PlayerPageComponent extends React.Component {
       player: {},
       playerStats: {},
       fantasyRanks: {},
+      gameLog: [],
     };
   }
 
@@ -26,11 +28,12 @@ export default class PlayerPageComponent extends React.Component {
     const player = await ApiService.getPlayerProfile(playerId);
     const playerStats = await ApiService.getPlayerStatsFromAllPeriods(playerId);
     const fantasyRanks = await ApiService.getFantasyRanks(playerId);
-    this.setState({ player, playerStats, fantasyRanks });
+    const gameLog = await ApiService.getPlayerGameLog(playerId);
+    this.setState({ player, playerStats, fantasyRanks, gameLog });
   }
 
   render() {
-    const { player, playerStats, fantasyRanks } = this.state;
+    const { player, playerStats, fantasyRanks, gameLog } = this.state;
     const playerPrimaryStats = playerStats[PRIMARY_STATS_PERIOD] || {};
     return (
       <div className="player-page-component">
@@ -41,6 +44,7 @@ export default class PlayerPageComponent extends React.Component {
         <div className="player-page-body">
           <PlayerStatsComponent playerStats={playerPrimaryStats} />
           <PlayerStatsSplitsComponent playerStats={playerStats} />
+          <PlayerGameLogComponent gameLog={gameLog} />
         </div>
       </div>
     );

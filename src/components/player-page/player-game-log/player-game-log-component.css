@@ -1,0 +1,4 @@
+.player-game-log-component {
+  display: flex;
+  flex-direction: column;
+}

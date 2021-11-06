@@ -12,6 +12,10 @@ const ROUTES = {
   PLAYER_PROFILE: { RELATIVE_PATH: "STATS_GET.php", TAG: "getPlayerById" },
   PLAYER_STATS: { RELATIVE_PATH: "STATS_GET.php", TAG: "getPersonalStatsById" },
   FANTASY_RANK: { RELATIVE_PATH: "STATS_GET.php", TAG: "getPersonalRankById" },
+  PLAYER_GAME_LOG: {
+    RELATIVE_PATH: "STATS_GET.php",
+    TAG: "getGameLogByPlayerId",
+  },
 };
 
 export default class ApiService {
@@ -21,6 +25,15 @@ export default class ApiService {
       TAG: ROUTES.PLAYER_PROFILE.TAG,
     };
     const url = `${BASE_URL}/${ROUTES.PLAYER_PROFILE.RELATIVE_PATH}`;
+    return await ApiClientService.getData(url, params);
+  }
+
+  static async getPlayerGameLog(playerId, options = {}) {
+    const params = {
+      ID: playerId,
+      TAG: ROUTES.PLAYER_GAME_LOG.TAG,
+    };
+    const url = `${BASE_URL}/${ROUTES.PLAYER_GAME_LOG.RELATIVE_PATH}`;
     return await ApiClientService.getData(url, params);
   }
 
