@@ -1,5 +1,10 @@
 .player-stats-splits-component {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.period-wrapper {
+  display: flex;
+  flex-direction: row;
 }
