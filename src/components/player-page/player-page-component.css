@@ -1,4 +1,9 @@
 .player-page-component {
   display: flex;
+  flex-direction: column;
+}
+
+.player-page-head {
+  display: flex;
   flex-direction: row;
 }

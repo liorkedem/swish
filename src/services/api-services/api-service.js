@@ -1,4 +1,9 @@
+import _ from "lodash";
 import ApiClientService from "../api-client-service/api-client-service";
+import {
+  ALL_STATS_CATEGORIES,
+  FANTASY_STATS_CATEGORIES,
+} from "../../constants/stats";
 
 const BASE_URL = "http://lior-kedem.com/swish";
 const ROUTES = {
@@ -17,6 +22,18 @@ export default class ApiService {
     return await ApiClientService.getData(url, params);
   }
 
+  static async getFantasyRanks(playerId, options = {}) {
+    const fantasyRanks = {};
+    for (const category of FANTASY_STATS_CATEGORIES) {
+      fantasyRanks[category] = await this.getFantasyRankByCategory(
+        playerId,
+        category,
+        options
+      );
+    }
+    return fantasyRanks;
+  }
+
   static async getFantasyRankByCategory(playerId, category, options = {}) {
     const params = {
       ID: playerId,
@@ -29,18 +46,6 @@ export default class ApiService {
     return (await ApiClientService.getData(url, params)).RANK;
   }
 
-  static async getFantasyRanks(playerId, options = {}) {
-    const fantasyRanks = {};
-    for (const category of ["ROTO8", "ROTO9", "DFS"]) {
-      fantasyRanks[category] = await this.getFantasyRankByCategory(
-        playerId,
-        category,
-        options
-      );
-    }
-    return fantasyRanks;
-  }
-
   static async getPlayerStats(playerId, options = {}) {
     const params = {
       ID: playerId,
@@ -49,7 +54,12 @@ export default class ApiService {
       ...options,
     };
     const url = `${BASE_URL}/${ROUTES.PLAYER_STATS.RELATIVE_PATH}`;
-    return await ApiClientService.getData(url, params);
+    const playerStats = _.pick(
+      await ApiClientService.getData(url, params),
+      ALL_STATS_CATEGORIES
+    );
+
+    return playerStats;
   }
 
   static async getHealth() {
